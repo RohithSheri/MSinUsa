@@ -1,0 +1,134 @@
+﻿/******Home-Index********/
+.indexheader {background-image: url('themes/base/images/doctoral-education.png') ; background-size :cover; min-height:25em;}
+.button-color {
+    background-color:#573D82;color:#fff
+}
+a {
+   color:#573D82; text-decoration: none;
+
+}
+ a:hover{
+     color:#5cb85c; text-decoration: none;
+    }
+ 
+
+.text-color {
+    color :#573D82
+}
+
+
+.white-color {
+    color : #fff;
+}
+
+.SignUp {
+    background-image: url('themes/base/images/LoginImg.jpg') ; background-size :cover;
+    padding-top : 2em; padding-bottom : 2em;
+}
+/***Account Credentials*****/
+/****************** **********************/
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #a94442;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ebccd1;
+    background-color:  #f2dede;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/*Universties*/
+.University-Background {
+    background-image: url('Images/Universities/Background/Main_University.jpg');
+    background-size :cover; padding-top:4em;
+  }
+
+.university-header {
+        min-height:20em;
+        background-size :cover;
+}
+.university-content {
+        align-self: center;padding-top:4em; color:#fff;
+}
+
+.glyphicon.fast-right-spinner {
+    -webkit-animation: glyphicon-spin-r 1s infinite linear;
+    animation: glyphicon-spin-r 1s infinite linear;
+}
+
+@-webkit-keyframes glyphicon-spin-r {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes glyphicon-spin-r {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+
+.footer {
+    background-color: #F1F1F1;
+    padding-top: 2em;
+}
+ .footer a, .footer li {
+     color :#573D82
+    }
+/*.footer,.footer a, .footer li {
+ color : #fff;
+}*/
+
+ui-autocomplete{position:absolute;cursor:default}
+* html .ui-autocomplete{width:1px}
+.ui-menu{list-style:none;padding:4px;margin:0;display:block;float:left}
+.ui-menu .ui-menu{margin-top:-3px}
+.ui-menu .ui-menu-item{margin:0;padding:2px;float:left;clear:left;width:100%}
+.ui-menu .ui-menu-item a{text-decoration:none;display:block;padding:.2em .4em;line-height:1.5;zoom:1}
+.ui-menu .ui-menu-item a.ui-state-hover,.ui-menu .ui-menu-item a.ui-state-active{font-weight:normal}
+.ui-widget{font-family:Noto Sans,sans-serif;font-size:1.12em}
+.ui-widget .ui-widget{font-size:1em}
+.ui-widget-content{background:#FFF;color:#666;box-shadow:0 4px 4px #f9f9f9}
+.ui-widget-content a{color:#FFF}.ui-widget-header a{color:#FFF}
+.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
+{background:#069;font-weight:normal;color:#FFF;-webkit-transition:all .5s;transition:all .5s}
+.ui-helper-hidden{display:none}
+.ui-helper-hidden-accessible{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}
+.university-header{height:300px;background-size:cover;background-position:center;color:#fff;display:flex}
+.university-header h3 small{color:#fff}
+.university-header:before{content:' ';position:absolute;left:0;right:0;top:0;bottom:0;background-color:rgba(0,0,0,.4)}
+.university-map-container iframe{border:0;width:100%;height:200px}
+.university-course-list li{margin-bottom:8px;font-size:1.12em;list-style:none}
+.label-round{display:inline-block;height:64px;width:64px;line-height:64px;-moz-border-radius:32px;border-radius:32px;color:#fff;text-align:center}
+.bg-info{background-color:#2196f3}.bg-success{background-color:#4caf50}

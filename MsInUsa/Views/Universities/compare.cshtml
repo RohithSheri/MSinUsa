@@ -1,0 +1,190 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<MsInUsa.Model.Universities_list>
+
+@{
+    ViewBag.Title = "Compare Universities";
+}
+<div class="container" style="color:gray">
+<div class="row">
+<div class="col-sm-9">
+<div class="row">
+<div class="col-xs-12">
+<h1>Compare universities</h1>
+<p>A comprehensive rating about the US Universities on noteworthy parameters can easily narrow down an applicants' choice from the pool of universities. Yocket university comparer helps in making informed decision about universities.</p>
+</div>
+<div class="clearfix"></div><hr>
+</div>
+<div class="row">
+ 
+<ul class="nav nav-tabs" role="tablist">
+<li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">OVERVIEW</a></li>
+<li role="presentation"><a href="#finance" aria-controls="finance" role="tab" data-toggle="tab">FINANCE</a></li>
+<li role="presentation"><a href="#conditions" aria-controls="conditions" role="tab" data-toggle="tab">WEATHER</a></li>
+</ul>
+<br>
+ 
+<div class="tab-content"> 
+<div role="tabpanel" class="tab-pane active" id="overview">
+@foreach(var c in Model){
+<div class="col-sm-4">
+<p>
+@*<a href="/universities/reviews/771/california-institute-of-technology/engineering">California Institute Of Technology</a> <br>*@
+@Html.ActionLink(c.UnivName, "reviews", "Universities",new { id = c.UnivId },null)<br>
+<small>@c.State, United States</small>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Type</small>
+<br>
+<strong>@c.UnivType</strong>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Rank</small>
+<br>
+<strong>Top @c.Rank</strong>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Acceptance</small>
+<br>
+<strong>@c.AcceptanceRate%</strong>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Enrollment</small>
+<br><strong>@c.TotalEnrollment</strong>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Avg. Quant</small>
+<br>
+<strong>@c.AvgGreQuant</strong>
+</p>
+</div> 
+<div class="clearfix"></div><hr> } </div>
+
+<div role="tabpanel" class="tab-pane" id="finance">
+@foreach(var c in Model){
+<div class="col-sm-4">
+<p>
+@*<a href="/universities/reviews/771/california-institute-of-technology/engineering">California Institute Of Technology</a> <br>*@
+@Html.ActionLink(c.UnivName, "reviews", "Universities", new { id = c.UnivId },null)<br>
+<small>California, United States</small>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Fees/yr</small>
+<br>
+<strong>@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", c.AvgTutionRate)</strong>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Expenses/yr</small>
+<br>
+<strong>@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", c.AvgLivingExpense)</strong>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Financial aid</small>
+<br>
+<strong>@*<i class="fa fa-money fa-lg"></i> <i class="fa fa-money fa-lg" style="color: #CCC;"></i> <i class="fa fa-money fa-lg" style="color: #CCC;"></i> *@
+    @for (int i = 1; i <=3; i++)
+    {
+       <i class="glyphicon glyphicon-usd glyphicon-lg text-color"></i>
+    }
+    @for(int i =4; i<=5; i++)
+    {<i class="glyphicon glyphicon-usd glyphicon-lg" style="color: #CCC;"></i>}
+</strong>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Jobs</small>
+<br>
+<strong>
+    @*<i class="fa fa-usd fa-lg"></i> <i class="fa fa-usd fa-lg"></i> <i class="fa fa-usd fa-lg"></i> <i class="fa fa-usd fa-lg"></i> <i class="fa fa-usd fa-lg"></i> *@
+    @for (int i = 1; i <=3; i++)
+    {
+       <i class="glyphicon glyphicon-thumbs-up glyphicon-lg text-color"></i>
+    }
+    @for(int i =4; i<=5; i++)
+    {<i class="glyphicon glyphicon-thumbs-down glyphicon-lg" style="color: #CCC;"></i>}
+</strong>
+</p>
+</div>
+<div class="clearfix"></div><hr>
+}
+</div> 
+ 
+<div role="tabpanel" class="tab-pane" id="conditions">
+@foreach(var c in Model){
+<div class="col-sm-4">
+<p>
+@Html.ActionLink(c.UnivName, "reviews", "Universities", new {id=c.UnivId }, null) <br>
+<small>@c.State, United States</small>
+</p>
+</div>
+<div class="col-sm-2 col-xs-6">
+<p>
+<small>Location</small>
+<br>
+<strong>
+   @* <i class="glyphicon glyphicon-star"></i> <i class="glyphicon glyphicon-star"></i> <i class="glyphicon glyphicon-star"></i> <i class="glyphicon glyphicon-star"></i> <i class="glyphicon glyphicon-star" style="color: #CCC;"></i> *@
+     @for (int i = 1; i <=3; i++)
+    {
+       <i class="glyphicon glyphicon-star glyphicon-lg text-color"></i>
+    }
+    @for(int i =4; i<=5; i++)
+    {<i class="glyphicon glyphicon-star glyphicon-lg" style="color: #CCC;"></i>}
+</strong>
+</p>
+</div>
+<div class="col-sm-5 col-xs-12">
+<p>
+<small>Weather</small>
+<br>
+<div class="row text-center">
+<div class="col-xs-3">
+<small>
+Jan-Mar<br>
+@c.WC_Jan_Mar </small>
+</div>
+<div class="col-xs-3">
+<small>
+Apr-Jun<br>
+@c.WC_apr_jun </small>
+</div>
+<div class="col-xs-3">
+<small>
+Jul-Sep<br>
+@c.WC_Jul_Sep</small>
+</div>
+<div class="col-xs-3">
+<small>
+Oct-Dec<br>
+@c.WC_oct_dec</small>
+</div>
+</div>
+</p>
+</div>
+<div class="clearfix"></div><hr>
+ }
+</div> 
+</div> 
+<br>
+@Html.PagedListPager(Model, page => Url.Action("compare","Universities", new{universities = ViewBag.sortparamUniv, page }), new PagedListRenderOptions {DisplayItemSliceAndTotal = true})
+</div>
+<div class="clearfix" style="padding-bottom : 6em"></div> </div>
+<div class="clearfix"></div>
+</div>
+</div>

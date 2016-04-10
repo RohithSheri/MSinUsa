@@ -1,0 +1,7 @@
+﻿@model MsInUsa.Model.Universities_list
+
+@{
+    ViewBag.Title = @Model.UnivName +"(" +@Model.NickName+ ")" +", " + @Model.State + ", UnitedStates- Review and Ranking";
+}
+
+@Html.Partial("reviewspartial",Model)

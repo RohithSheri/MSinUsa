@@ -1,0 +1,214 @@
+﻿@model MsInUsa.Model.Universities_list
+
+<div class="container-fluid section">
+    <div class="row">
+        <div class="col-sm-12 university-header" style="background-image:url(@Href("~/Content/Images/Universities/Background/Main_University.jpg"));">
+            <div class="col-sm-11 col-sm-offset-1 university-content">
+                <div class="img-thumbnail" style="max-width: 80px;">
+                    <img src="~/Content/Images/Universities/Logo/@Model.NickName.ToLower()_logo.jpg"  alt="@Model.NickName-university-logo" class="img-responsive"/> </div>
+                <h1><strong>@Model.UnivName (@Model.NickName.ToUpper())</strong></h1>
+                <h4>@Model.State, United States</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container" style="color:#555">
+    <div class="row">
+        <div class="col-sm-9">
+             <div class="row text-center">
+                <div class="col-sm-3 col-xs-6">
+                    <h3>
+                        @Model.UnivType<br>
+                        <small>university</small>
+                    </h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h3>
+                        @if (Model.AcceptanceRate != null)
+                        {@Model.AcceptanceRate}
+                        %<br>
+                        <small>acceptance rate</small>
+                    </h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h3>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", Model.AvgTutionRate)<small>/ year</small>
+                        <br>
+                        <small>average tuition fee</small>
+                    </h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h3>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", Model.AvgLivingExpense)<small> /year</small>
+                        <br>
+                        <small>average living expense</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
+
+            <div class="row text-center">
+                @*<div class="col-sm-3 col-xs-6">
+                    <h3>
+                        <span class="label-round bg-info"></span>
+                        <br>
+                        <small>Students applied</small>
+                    </h3>
+                </div>*@
+                @*<div class="col-sm-3 col-xs-6">
+                    <h3>
+                        <span class="label-round bg-success"></span>
+                        <br>
+                        <small>Students admitted</small>
+                    </h3>
+                </div>*@
+                <div class="col-sm-3 col-xs-6">
+                    <h3>
+                        <span class="label-round bg-info">
+                        @if (Model.AvgGreQuant != null)
+                        {@Model.AvgGreQuant}</span><br>
+                        <small>average GRE quant score</small>
+                    </h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h3>
+                        <span class="label-round bg-info">
+                        @if (Model.TotalEnrollment != null)
+                        {@Model.TotalEnrollment}</span><br>
+                        <small>total graduate enrollment</small>
+                    </h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h3>
+                       Website: <br><a href="http://@Model.Website" target="_blank" class="text-color">@Model.Website</a>
+                    </h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Engineering graduate courses offered at @Model.NickName.ToUpper()</h4>
+                    <ul class="university-course-list">
+                       @foreach (var c in Model.universitycourses) { 
+                       <li>@c.ToString()</li>
+                       }
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <h4>See where @Model.NickName.ToUpper() is located</h4>
+                    <div class="university-map-container">
+                      @*<iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=@Model.UnivName,@Model.State&key=AIzaSyCxHJd6_KrywcTORn1UOfYYTFnn2WYaLL8&zoom=10" allowfullscreen></iframe>*@
+                    <iframe width="400px" height="200px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCxHJd6_KrywcTORn1UOfYYTFnn2WYaLL8&q=@Model.UnivName,@Model.State&zoom=5" allowfullscreen></iframe>
+                    </div>
+                    <br>    
+                    <table class="table">
+                        <h4>Weather conditions around @Model.NickName.ToUpper()</h4>
+                        <tr>
+                            <td>Jan - Mar</td>
+                            <td>Apr - Jun</td>
+                            <td>Jul - Sep</td>
+                            <td>Oct - Dec</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>@Model.WC_Jan_Mar<small>&#x2103;</small></h3>
+                            </td>
+                            <td>
+                                <h3>@Model.WC_apr_jun<small>&#x2103;</small></h3>
+                            </td>
+                            <td>
+                                <h3>@Model.WC_Jul_Sep<small>&#x2103;</small></h3>
+                            </td>
+                            <td>
+                                <h3>@Model.WC_oct_dec<small>&#x2103;</small></h3>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-10 col-xs-12">
+                    @if(Model.About != null){
+                    <div class="row">
+                        <h3>About @Model.UnivName</h3>
+                        <p>@Model.About</p>
+                    </div>
+                    }
+                    @if(Model.LocationDetails != null){
+                    <div class="row">
+                        <h3>Location</h3>
+                        <p>@Model.LocationDetails</p>
+                    </div>
+                    }
+                    @if(Model.Infrastructure != null){
+                    <div class="row">
+                        <h3>Infrastructure</h3>
+                        <p>@Model.Infrastructure</p>
+                    </div>
+                    }
+                    @if(Model.ResidingOptions != null){
+                    <div class="row">
+                        <h3>Residing Options</h3>
+                        <p>@Model.ResidingOptions</p>
+                    </div>
+                    }
+                    @if(Model.WeatherDetails != null){
+                    <div class="row">
+                        <h3>Weather</h3>
+                        <p>@Model.WeatherDetails</p>
+                    </div>
+                    }
+                    @if(Model.Faculty_and_pedagogy != null){
+                    <div class="row">
+                        <h3>Faculty and pedagogy</h3>
+                        <p>@Model.Faculty_and_pedagogy</p>
+                    </div>
+                    }
+                    @if(Model.FinancialAid != null){
+                    <div class="row">
+                        <h3>Financial aid</h3>
+                        <p>@Model.FinancialAid</p>
+                    </div>
+                    }
+                    @if(Model.Jobs_and_placements != null){
+                    <div class="row">
+                        <h3>Jobs and placements at @Model.NickName</h3>
+                        <p>@Model.Jobs_and_placements</p>
+                    </div>
+                    }
+                    @if(Model.Crowd_and_campus_life != null){
+                    <div class="row">
+                        <h3>Crowd and campus life</h3>
+                        <p>@Model.Crowd_and_campus_life</p>
+                    </div>
+                    }
+                    @if(Model.Alumni != null){
+                    <div class="row">
+                        <h3>Alumni</h3>
+                        <p>
+                           @Model.Alumni
+                        </p>
+                    </div>
+                    }
+                    @if(Model.Verdict != null){
+                    <div class="row">
+                        <h3>Verdict</h3>
+                        <p>@Model.Verdict</p>
+                    </div>
+                    }
+                    <div class="row">
+                        <h4>Website: <a href="http://@Model.Website" target="_blank" class="text-color">@Model.Website</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <br /><br />
+</div>
+

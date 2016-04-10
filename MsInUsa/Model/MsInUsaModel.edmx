@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AdmitsRejects" EntityType="Model.Store.AdmitsRejects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CourseWork" EntityType="Model.Store.CourseWork" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FullProfile" EntityType="Model.Store.FullProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Universities_list" EntityType="Model.Store.Universities_list" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="University_Deadlines" EntityType="Model.Store.University_Deadlines" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_AdmitsRejects_UserProfile1" Association="Model.Store.FK_AdmitsRejects_UserProfile1">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="AdmitsRejects" EntitySet="AdmitsRejects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FullProfile_UserProfile" Association="Model.Store.FK_FullProfile_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="FullProfile" EntitySet="FullProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_University_Deadlines_Universities_list" Association="Model.Store.FK_University_Deadlines_Universities_list">
+            <End Role="Universities_list" EntitySet="Universities_list" />
+            <End Role="University_Deadlines" EntitySet="University_Deadlines" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AdmitsRejects">
+          <Key>
+            <PropertyRef Name="AdmitRow" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="StudentName" Type="varchar" MaxLength="50" />
+          <Property Name="UnivId" Type="int" Nullable="false" />
+          <Property Name="UnivName" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="50" />
+          <Property Name="AdmitRow" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="CourseWork">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Department" Type="varchar" MaxLength="50" />
+          <Property Name="Course" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FullProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UGCollege" Type="varchar" MaxLength="200" />
+          <Property Name="UGCourse" Type="varchar" MaxLength="100" />
+          <Property Name="UGScore" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="UGBacklogs" Type="int" />
+          <Property Name="AppearedGre" Type="bit" />
+          <Property Name="GVerbal" Type="numeric" Precision="3" />
+          <Property Name="GQuant" Type="numeric" Precision="3" />
+          <Property Name="GAwa" Type="numeric" Precision="1" />
+          <Property Name="Toefl" Type="bit" />
+          <Property Name="Ielts" Type="bit" />
+          <Property Name="TIReading" Type="numeric" Precision="2" />
+          <Property Name="TIWriting" Type="numeric" Precision="2" />
+          <Property Name="TIListening" Type="numeric" Precision="2" />
+          <Property Name="TISpeaking" Type="numeric" Precision="2" />
+          <Property Name="WorkExperience" Type="numeric" Precision="3" />
+          <Property Name="Papers" Type="varchar" MaxLength="50" />
+          <Property Name="MSCourse" Type="varchar" MaxLength="200" />
+          <Property Name="Term" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="numeric" Precision="4" />
+          <Property Name="DreamUniversity" Type="varchar" MaxLength="200" />
+          <Property Name="GDay" Type="decimal" Precision="2" />
+          <Property Name="GMonth" Type="varchar" MaxLength="20" />
+          <Property Name="GYear" Type="decimal" Precision="4" />
+          <Property Name="Sop" Type="int" />
+          <Property Name="Lor" Type="int" />
+          <Property Name="ExtraCurricular" Type="int" />
+          <Property Name="CommunityService" Type="int" />
+          <Property Name="personalScore" Type="decimal" Precision="3" Scale="1" />
+        </EntityType>
+        <EntityType Name="Universities_list">
+          <Key>
+            <PropertyRef Name="UnivId" />
+          </Key>
+          <Property Name="UnivId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UnivName" Type="varchar" MaxLength="50" />
+          <Property Name="UnivType" Type="varchar" MaxLength="10" />
+          <Property Name="AcceptanceRate" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="AvgTutionRate" Type="money" />
+          <Property Name="AvgLivingExpense" Type="int" />
+          <Property Name="AvgGreQuant" Type="decimal" Precision="3" />
+          <Property Name="TotalEnrollment" Type="int" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApplicationFee" Type="money" />
+          <Property Name="Website" Type="nvarchar(max)" />
+          <Property Name="About" Type="nvarchar(max)" />
+          <Property Name="LocationDetails" Type="nvarchar(max)" />
+          <Property Name="Infrastructure" Type="nvarchar(max)" />
+          <Property Name="ResidingOptions" Type="nvarchar(max)" />
+          <Property Name="WeatherDetails" Type="nvarchar(max)" />
+          <Property Name="Faculty and pedagogy" Type="nvarchar(max)" />
+          <Property Name="Jobs and placements" Type="nvarchar(max)" />
+          <Property Name="Crowd and campus life" Type="nvarchar(max)" />
+          <Property Name="Alumni" Type="nvarchar(max)" />
+          <Property Name="Verdict" Type="nvarchar(max)" />
+          <Property Name="WC-Jan-Mar" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="WC-apr-jun" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="WC-Jul-Sep" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="WC-oct-dec" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="NickName" Type="varchar" MaxLength="50" />
+          <Property Name="Rank" Type="decimal" Precision="4" />
+          <Property Name="FinancialAid" Type="varchar(max)" />
+          <Property Name="OverallScore" Type="decimal" Precision="2" Scale="1" />
+        </EntityType>
+        <EntityType Name="University_Deadlines">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="Univ_Id" Type="int" Nullable="false" />
+          <Property Name="Course" Type="varchar" MaxLength="50" />
+          <Property Name="Term" Type="varchar" MaxLength="10" />
+          <Property Name="Deadline" Type="date" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="RowId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Email_Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_Number" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="DOB" Type="date" />
+        </EntityType>
+        <Association Name="FK_AdmitsRejects_UserProfile1">
+          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
+          <End Role="AdmitsRejects" Type="Model.Store.AdmitsRejects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmitsRejects">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FullProfile_UserProfile">
+          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
+          <End Role="FullProfile" Type="Model.Store.FullProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FullProfile">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_University_Deadlines_Universities_list">
+          <End Role="Universities_list" Type="Model.Store.Universities_list" Multiplicity="1" />
+          <End Role="University_Deadlines" Type="Model.Store.University_Deadlines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universities_list">
+              <PropertyRef Name="UnivId" />
+            </Principal>
+            <Dependent Role="University_Deadlines">
+              <PropertyRef Name="Univ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MsInUsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserProfiles" EntityType="Model.UserProfile" />
+          <EntitySet Name="CourseWorks" EntityType="Model.CourseWork" />
+          <EntitySet Name="FullProfiles" EntityType="Model.FullProfile" />
+          <AssociationSet Name="FK_FullProfile_UserProfile" Association="Model.FK_FullProfile_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="FullProfile" EntitySet="FullProfiles" />
+          </AssociationSet>
+          <EntitySet Name="Universities_list" EntityType="Model.Universities_list" />
+          <EntitySet Name="University_Deadlines" EntityType="Model.University_Deadlines" />
+          <AssociationSet Name="FK_University_Deadlines_Universities_list" Association="Model.FK_University_Deadlines_Universities_list">
+            <End Role="Universities_list" EntitySet="Universities_list" />
+            <End Role="University_Deadlines" EntitySet="University_Deadlines" />
+          </AssociationSet>
+          <EntitySet Name="AdmitsRejects" EntityType="Model.AdmitsReject" />
+          <AssociationSet Name="FK_AdmitsRejects_UserProfile1" Association="Model.FK_AdmitsRejects_UserProfile1">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="AdmitsReject" EntitySet="AdmitsRejects" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email_Id" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone_Number" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FullProfile" Relationship="Model.FK_FullProfile_UserProfile" FromRole="UserProfile" ToRole="FullProfile" />
+          <Property Type="String" Name="Gender" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DOB" Precision="0" />
+          <NavigationProperty Name="AdmitsRejects" Relationship="Model.FK_AdmitsRejects_UserProfile1" FromRole="UserProfile" ToRole="AdmitsReject" />
+        </EntityType>
+        <EntityType Name="CourseWork">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Type="Int32" Name="CourseId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Department" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Course" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FullProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UGCollege" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UGCourse" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="UGScore" Precision="5" Scale="2" />
+          <Property Type="Int32" Name="UGBacklogs" />
+          <Property Type="Boolean" Name="AppearedGre" />
+          <Property Type="Decimal" Name="GVerbal" Precision="3" Scale="0" />
+          <Property Type="Decimal" Name="GQuant" Precision="3" Scale="0" />
+          <Property Type="Decimal" Name="GAwa" Precision="1" Scale="0" />
+          <Property Type="Boolean" Name="Toefl" />
+          <Property Type="Boolean" Name="Ielts" />
+          <Property Type="Decimal" Name="TIReading" Precision="2" Scale="0" />
+          <Property Type="Decimal" Name="TIWriting" Precision="2" Scale="0" />
+          <Property Type="Decimal" Name="TIListening" Precision="2" Scale="0" />
+          <Property Type="Decimal" Name="TISpeaking" Precision="2" Scale="0" />
+          <Property Type="Decimal" Name="WorkExperience" Precision="3" Scale="0" />
+          <Property Type="String" Name="Papers" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MSCourse" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Term" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Year" Precision="4" Scale="0" />
+          <Property Type="String" Name="DreamUniversity" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK_FullProfile_UserProfile" FromRole="FullProfile" ToRole="UserProfile" />
+          <Property Type="Decimal" Name="GDay" Precision="2" Scale="0" />
+          <Property Type="String" Name="GMonth" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="GYear" Precision="4" Scale="0" />
+          <Property Type="Int32" Name="Sop" />
+          <Property Type="Int32" Name="Lor" />
+          <Property Type="Int32" Name="ExtraCurricular" />
+          <Property Type="Int32" Name="CommunityService" />
+          <Property Type="Decimal" Name="personalScore" Precision="3" Scale="1" />
+        </EntityType>
+        <Association Name="FK_FullProfile_UserProfile">
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Model.FullProfile" Role="FullProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FullProfile">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Universities_list">
+          <Key>
+            <PropertyRef Name="UnivId" />
+          </Key>
+          <Property Type="Int32" Name="UnivId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UnivName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UnivType" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="AcceptanceRate" Precision="4" Scale="1" />
+          <Property Type="Decimal" Name="AvgTutionRate" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="AvgLivingExpense" />
+          <Property Type="Decimal" Name="AvgGreQuant" Precision="3" Scale="0" />
+          <Property Type="Int32" Name="TotalEnrollment" />
+          <Property Type="String" Name="Location" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="ApplicationFee" Precision="19" Scale="4" />
+          <Property Type="String" Name="Website" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="About" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LocationDetails" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Infrastructure" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ResidingOptions" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WeatherDetails" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Faculty_and_pedagogy" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Jobs_and_placements" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Crowd_and_campus_life" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Alumni" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Verdict" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="WC_Jan_Mar" Precision="4" Scale="1" />
+          <Property Type="Decimal" Name="WC_apr_jun" Precision="4" Scale="1" />
+          <Property Type="Decimal" Name="WC_Jul_Sep" Precision="4" Scale="1" />
+          <Property Type="Decimal" Name="WC_oct_dec" Precision="4" Scale="1" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NickName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Rank" Precision="4" Scale="0" />
+          <Property Type="String" Name="FinancialAid" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="University_Deadlines" Relationship="Model.FK_University_Deadlines_Universities_list" FromRole="Universities_list" ToRole="University_Deadlines" />
+          <Property Type="Decimal" Name="OverallScore" Precision="2" Scale="1" />
+        </EntityType>
+        <EntityType Name="University_Deadlines">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Type="Int32" Name="Univ_Id" Nullable="false" />
+          <Property Type="String" Name="Course" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Term" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Deadline" Precision="0" />
+          <Property Type="Int32" Name="CourseId" />
+          <Property Type="Int32" Name="RowId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Universities_list" Relationship="Model.FK_University_Deadlines_Universities_list" FromRole="University_Deadlines" ToRole="Universities_list" />
+        </EntityType>
+        <Association Name="FK_University_Deadlines_Universities_list">
+          <End Type="Model.Universities_list" Role="Universities_list" Multiplicity="1" />
+          <End Type="Model.University_Deadlines" Role="University_Deadlines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universities_list">
+              <PropertyRef Name="UnivId" />
+            </Principal>
+            <Dependent Role="University_Deadlines">
+              <PropertyRef Name="Univ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdmitsReject">
+          <Key>
+            <PropertyRef Name="AdmitRow" />
+          </Key>
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="StudentName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UnivId" Nullable="false" />
+          <Property Type="String" Name="UnivName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CourseId" Nullable="false" />
+          <Property Type="String" Name="CourseName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK_AdmitsRejects_UserProfile1" FromRole="AdmitsReject" ToRole="UserProfile" />
+          <Property Type="Int32" Name="AdmitRow" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_AdmitsRejects_UserProfile1">
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Model.AdmitsReject" Role="AdmitsReject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmitsReject">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="MsInUsEntities">
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="Model.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseWorks">
+            <EntityTypeMapping TypeName="Model.CourseWork">
+              <MappingFragment StoreEntitySet="CourseWork">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FullProfiles">
+            <EntityTypeMapping TypeName="Model.FullProfile">
+              <MappingFragment StoreEntitySet="FullProfile">
+                <ScalarProperty Name="personalScore" ColumnName="personalScore" />
+                <ScalarProperty Name="CommunityService" ColumnName="CommunityService" />
+                <ScalarProperty Name="ExtraCurricular" ColumnName="ExtraCurricular" />
+                <ScalarProperty Name="Lor" ColumnName="Lor" />
+                <ScalarProperty Name="Sop" ColumnName="Sop" />
+                <ScalarProperty Name="GYear" ColumnName="GYear" />
+                <ScalarProperty Name="GMonth" ColumnName="GMonth" />
+                <ScalarProperty Name="GDay" ColumnName="GDay" />
+                <ScalarProperty Name="DreamUniversity" ColumnName="DreamUniversity" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="MSCourse" ColumnName="MSCourse" />
+                <ScalarProperty Name="Papers" ColumnName="Papers" />
+                <ScalarProperty Name="WorkExperience" ColumnName="WorkExperience" />
+                <ScalarProperty Name="TISpeaking" ColumnName="TISpeaking" />
+                <ScalarProperty Name="TIListening" ColumnName="TIListening" />
+                <ScalarProperty Name="TIWriting" ColumnName="TIWriting" />
+                <ScalarProperty Name="TIReading" ColumnName="TIReading" />
+                <ScalarProperty Name="Ielts" ColumnName="Ielts" />
+                <ScalarProperty Name="Toefl" ColumnName="Toefl" />
+                <ScalarProperty Name="GAwa" ColumnName="GAwa" />
+                <ScalarProperty Name="GQuant" ColumnName="GQuant" />
+                <ScalarProperty Name="GVerbal" ColumnName="GVerbal" />
+                <ScalarProperty Name="AppearedGre" ColumnName="AppearedGre" />
+                <ScalarProperty Name="UGBacklogs" ColumnName="UGBacklogs" />
+                <ScalarProperty Name="UGScore" ColumnName="UGScore" />
+                <ScalarProperty Name="UGCourse" ColumnName="UGCourse" />
+                <ScalarProperty Name="UGCollege" ColumnName="UGCollege" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Universities_list">
+            <EntityTypeMapping TypeName="Model.Universities_list">
+              <MappingFragment StoreEntitySet="Universities_list">
+                <ScalarProperty Name="OverallScore" ColumnName="OverallScore" />
+                <ScalarProperty Name="FinancialAid" ColumnName="FinancialAid" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="WC_oct_dec" ColumnName="WC-oct-dec" />
+                <ScalarProperty Name="WC_Jul_Sep" ColumnName="WC-Jul-Sep" />
+                <ScalarProperty Name="WC_apr_jun" ColumnName="WC-apr-jun" />
+                <ScalarProperty Name="WC_Jan_Mar" ColumnName="WC-Jan-Mar" />
+                <ScalarProperty Name="Verdict" ColumnName="Verdict" />
+                <ScalarProperty Name="Alumni" ColumnName="Alumni" />
+                <ScalarProperty Name="Crowd_and_campus_life" ColumnName="Crowd and campus life" />
+                <ScalarProperty Name="Jobs_and_placements" ColumnName="Jobs and placements" />
+                <ScalarProperty Name="Faculty_and_pedagogy" ColumnName="Faculty and pedagogy" />
+                <ScalarProperty Name="WeatherDetails" ColumnName="WeatherDetails" />
+                <ScalarProperty Name="ResidingOptions" ColumnName="ResidingOptions" />
+                <ScalarProperty Name="Infrastructure" ColumnName="Infrastructure" />
+                <ScalarProperty Name="LocationDetails" ColumnName="LocationDetails" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ApplicationFee" ColumnName="ApplicationFee" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="TotalEnrollment" ColumnName="TotalEnrollment" />
+                <ScalarProperty Name="AvgGreQuant" ColumnName="AvgGreQuant" />
+                <ScalarProperty Name="AvgLivingExpense" ColumnName="AvgLivingExpense" />
+                <ScalarProperty Name="AvgTutionRate" ColumnName="AvgTutionRate" />
+                <ScalarProperty Name="AcceptanceRate" ColumnName="AcceptanceRate" />
+                <ScalarProperty Name="UnivType" ColumnName="UnivType" />
+                <ScalarProperty Name="UnivName" ColumnName="UnivName" />
+                <ScalarProperty Name="UnivId" ColumnName="UnivId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="University_Deadlines">
+            <EntityTypeMapping TypeName="Model.University_Deadlines">
+              <MappingFragment StoreEntitySet="University_Deadlines">
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Univ_Id" ColumnName="Univ_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdmitsRejects">
+            <EntityTypeMapping TypeName="Model.AdmitsReject">
+              <MappingFragment StoreEntitySet="AdmitsRejects">
+                <ScalarProperty Name="AdmitRow" ColumnName="AdmitRow" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UnivName" ColumnName="UnivName" />
+                <ScalarProperty Name="UnivId" ColumnName="UnivId" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

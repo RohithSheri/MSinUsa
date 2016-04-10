@@ -1,0 +1,39 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<MsInUsa.Model.University_Deadlines>
+@{
+    ViewBag.Title = "UniversitiesDeadlines";
+}
+
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+<h1 class="text-color">Upcoming university deadlines</h1><hr>
+<div class="responsive">
+<table class="table table-striped">
+<thead>
+<tr>
+<th> @Html.ActionLink("University","UniversitiesDeadlines", new {sortby = ViewBag.sortUniv}) </th>
+<th>@Html.ActionLink("Course","UniversitiesDeadlines", new {sortby = ViewBag.sortCourse})</th>
+<th>@Html.ActionLink("Term","UniversitiesDeadlines", new {sortby = ViewBag.sortTerm})</th>
+<th>@Html.ActionLink("Deadline","UniversitiesDeadlines", new {sortby = ViewBag.sortDeadline})</th>
+</tr>
+</thead>
+<tbody>
+@foreach(var c in Model){
+<tr>
+<td>@c.Universities_list.UnivName</td>
+<td>@c.Course</td>
+<td class="text-uppercase">@c.Term</td>
+<td>@c.Deadline.Value.Day/@c.Deadline.Value.Month/@DateTime.Today.Year</td>
+</tr>
+}
+</tbody>
+</table>
+</div>
+@Html.PagedListPager(Model, Page => Url.Action("UniversitiesDeadlines","Universities", new{ Page , sortby = Request.QueryString["sortby"] }))
+</div>
+
+<div class="clearfix"></div>
+</div>
+</div>

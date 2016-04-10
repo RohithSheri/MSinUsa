@@ -1,0 +1,262 @@
+﻿@model MsInUsa.Model.FullProfile
+
+@{
+    ViewBag.Title = "Edit Profile";
+}
+
+<div class="container-fluid">
+</div>
+<div class="container">
+     <div class="text-center">
+        <h1><span class="label label-pill label-primary button-color">EDIT PROFILE</span></h1>
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+           
+            @using (Html.BeginForm("edit", "Profiles", FormMethod.Post))
+             {
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <h3 class="text-info text-color">UNDERGRAD DETAILS</h3>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div class="pull-right hidden" id="ug-institute-add-url"><small><a href="/institutes/add" target="_blank">Can&#039;t see your college?</a></small></div>
+                            <label class="text-color">College:</label>
+                            <div class="form-group">
+                                <div class="ui-widget">
+                                    <div class="input-group">
+                                        <span class="input-group-addon button-color"><i id="ug-institute-search-icon" class="glyphicon glyphicon-education"></i></span>
+                                        @Html.TextBoxFor(m=> m.UGCollege, new {@class = "form-control", @placeholder="Enter college name"})
+                                        @Html.ValidationMessageFor(m =>m.UGCollege)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-color">Course:</label>
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.UGCourse, Model.itemslist, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m =>m.UGCourse)
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br>
+                        <div class="col-sm-6">
+                            <label class="text-color">Aggregate score and pattern:</label>
+                            <div class="input-group">
+                                <div class="input text">
+                                    @Html.TextBoxFor(m => m.UGScore, new { @class = "form-control", @placeholder = "UG score", @min =0, @max=10 })
+                                    @Html.ValidationMessageFor(m =>m.UGScore)
+                                </div>
+                                <div class="input-group-btn">
+                                    <button id="change-ug-score-pattern" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">CGPA</button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="ug_score_key" id="ug-score-key" value="2" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-color">Backlogs:</label>
+                            <div class="form-group">
+                                <div class="input number">
+                                    @Html.TextBoxFor(m=>m.UGBacklogs, new{@class = "form-control", @placeholder="Number of backlogs during your course"})
+                                    @Html.ValidationMessageFor(m =>m.UGBacklogs)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <h3 class="text-color">GRE AND TOEFL/IELTS SCORES</h3>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div>
+                                <label class="control-label text-color">Appeared for GRE?</label> 
+                            </div>
+                            <div class="radio text-color">
+                                <label for="gre-appeared-1">
+                                    @Html.RadioButtonFor(m => m.AppearedGre, value: true,htmlAttributes: new {@id = "AppearedGre",@checked = @Model.AppearedGre})Yes</label>
+                            </div>
+                            <div class="radio text-color">
+                                <label for="gre-appeared-1">
+                                    @Html.RadioButtonFor(m => m.AppearedGre, value: false , htmlAttributes: new {@id= "AppearedGreNo"})Not yet</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 text-color">
+                            <label id="gre-appeared-date-text">Appearing on</label>
+                            <div class="input-group">
+                                <div class="input date">
+                                   @Html.DropDownListFor(m=>m.GYear, Model.listyear)
+                                   @Html.DropDownListFor(m=>m.GMonth,Model.listMonth)
+                                   @Html.DropDownListFor(m=>m.GDay,Model.listday)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="gre_score">
+                            <div class="col-xs-4">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label text-color"><small>Verbal</small></label>
+                                    <div class="input number">
+                                        @Html.TextBoxFor(m=>m.GVerbal, new { @class="form-control gre",  @placeholder="GRE verbal score", type="number", @min = "130", @max = "170"})
+                                        @Html.ValidationMessageFor(m =>m.GVerbal)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label text-color"><small>Quant</small></label>
+                                    <div class="input number">
+                                        @Html.TextBoxFor(m=>m.GQuant, new { @class="form-control gre",  @placeholder="GRE quant score", type="number", @min = "130", @max = "170"})
+                                        @Html.ValidationMessageFor(m =>m.GQuant)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label text-color"><small>AWA</small></label>
+                                    <div class="input number">
+                                        @Html.TextBoxFor(m=>m.GAwa, new { @class="form-control",  @placeholder="GRE AWA score",@id="greAwa", type="number", @min = "0", @max ="6"})
+                                        @Html.ValidationMessageFor(m =>m.GAwa)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-sm-6">
+                            <div>
+                                <label class="control-label text-color">Appeared for TOEFL/IELTS?</label>
+                            </div>
+                            <div class="col-xs-4"> 
+                                <div class="radio">
+                                    <label for="en-exam-key-2" class="text-color">
+                                       @if(Model.Toefl == true){ @Html.RadioButtonFor(M=>M.Toefl, value: true, htmlAttributes: new{ @id ="toefl", @checked=true}) }
+                                        else{ @Html.RadioButtonFor(M=>M.Toefl, value: true, htmlAttributes: new{ @id ="toefl"}) }TOEFL</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="radio">
+                                    <label for="en-exam-key-1" class="text-color">
+                                        @if (Model.Ielts == true) { @Html.RadioButtonFor(m => m.Toefl, value: false, htmlAttributes: new { @id = "ielts", @checked= true})}
+                                        else{@Html.RadioButtonFor(m => m.Toefl, value: false, htmlAttributes: new { @id = "ielts" })}IELTS</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="radio">
+                                    <label for="en-exam-key-0" class="text-color">
+                                        @if (Model.Toefl == false && Model.Ielts == false) { @Html.RadioButton("Toefl", value: 2, htmlAttributes: new {@id ="none", @checked = true })}
+                                       else{ @Html.RadioButton("Toefl", value: 2, htmlAttributes: new {@id ="none" })}None</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="en_exam_score">
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label text-color"><small>Reading</small></label>
+                                    <div class="input number">
+                                        @Html.TextBoxFor(m => m.TIReading, new { @class="form-control tl", @placeholder="Reading score" })
+                                        @Html.ValidationMessageFor(m =>m.TIReading)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label text-color"><small>Writing</small></label>
+                                    <div class="input number">
+                                        @Html.TextBoxFor(m => m.TIWriting, new { @class="form-control tl", @placeholder="Writing score"})
+                                        @Html.ValidationMessageFor(m =>m.TIWriting)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label text-color"><small>Listening</small></label>
+                                    <div class="input number">
+                                        @Html.TextBoxFor(m => m.TIListening, new { @class="form-control tl", @placeholder="Listening score"})
+                                        @Html.ValidationMessageFor(m =>m.TIListening)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="control-label text-color"><small>Speaking</small></label>
+                                    <div class="input number">
+                                        @Html.TextBoxFor(m => m.TISpeaking, new { @class="form-control tl", @placeholder="Speaking score"})
+                                        @Html.ValidationMessageFor(m =>m.TISpeaking)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <h3 class="text-color">WORK EXPERIENCE AND PAPERS</h3>
+                        <hr>
+                        <div class="col-sm-6">
+                            <label class="control-label text-color">Work experience/internship:</label>
+                            <div class="input-group">
+                                <div class="input number">
+                                    @Html.TextBoxFor(m => m.WorkExperience, new { @class = "form-control text-color", @placeholder = "Relevant work ex period" })
+                                </div>
+                                <span class="input-group-addon button-color">months</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-color">Technical papers published:</label>
+                            @Html.DropDownListFor(m => m.Papers, Model.listpapers,new { @class = "form-control" })
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                        <div class="panel-body">
+                            <h3 class="text-warning text-color">INTERESTS FOR MASTERS</h3>
+                            <hr>
+                            <div class="col-sm-6">
+                                <label class="control-label text-color">Interested course:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon button-color"><i id="interested-course-group-search-icon" class="glyphicon glyphicon-book"></i></span>
+                                    <div class="input text">
+                                        @*<input type="text" name="interested_course_group_name" class="form-control" placeholder="eg. Computer Science Engineering" id="interested-course-group-name" />*@
+                                        @Html.DropDownListFor(m=>m.MSCourse, Model.itemslist, new{@class ="form-control", @placeholder="eg. Computer Science Engineering"})
+                                        @Html.ValidationMessageFor(m =>m.MSCourse)
+                                    </div>
+                                    <input type="hidden" name="interested_course_group_id" id="interested-course-group-id" />
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="text-color">Term:</label>
+                                @Html.DropDownListFor(m => m.Term , Model.listterm, new{ @class = "form-control"})
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="text-color">Year:</label>
+                                @Html.DropDownListFor(m => m.Year , Model.listyear , new{ @class = "form-control"})
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+                            <div class="col-sm-6">
+                                <label class="control-label text-color">Dream university:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon button-color"><i id="dream-university-search-icon" class="glyphicon glyphicon-home"></i></span>
+                                    <div class="input text">
+                                        @Html.TextBoxFor(m => m.DreamUniversity, new{ @class= "form-control", @placeholder="eg. Stanford University"})
+                                    </div>
+                                </div>
+                                <input type="hidden" name="dream_university_id" id="dream-university-id" />
+                            </div>
+                        </div>
+                    </div>
+                
+          <button class="btn btn-primary btn-lg pull-right button-color" type="submit">SAVE PROFILE</button> }
+        </div>
+    </div>
+    </div>
+<br>

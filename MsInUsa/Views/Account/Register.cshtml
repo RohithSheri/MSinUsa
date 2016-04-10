@@ -1,0 +1,70 @@
+﻿@using MsInUsa.Controllers
+@model MsInUsa.Model.UserProfile
+@{
+    ViewBag.Title = "Sign Up";
+}
+<div>
+    <h1><span class="label label-info col-sm-offset-3 button-color">Regsitration</span></h1>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "padding-top:2em; padding-left:2em" }))
+    {
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="First Name">First Name:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+            </div>
+            <div class="col-sm-3">
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="Last Name">Last Name:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+            </div>
+            <div class="col-sm-3">
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="Phone Number">Phone Number:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.Phone_Number, new { @class = "form-control", placeholder = "Ex : 453-393-4567" })
+            </div>  
+            <div class="col-sm-3">
+                @Html.ValidationMessageFor(m => m.Phone_Number)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Email:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.Email_IdRegister, new { @class = "form-control", @type = "email", placeholder = "something@gmail.com" })
+            </div>
+            <div class="col-sm-3">
+                @Html.ValidationMessageFor(m => m.Email_IdRegister)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Password:</label>
+            <div class="col-sm-3">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+            </div>
+            <div class="col-sm-3">
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Confirm Password:</label>
+            <div class="col-sm-3">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+            </div>
+            <div class="col-sm-3">
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default button-color">Sign In</button>
+            </div>
+        </div>
+    }
+</div>

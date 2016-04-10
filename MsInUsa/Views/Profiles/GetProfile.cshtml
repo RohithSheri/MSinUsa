@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "GetProfile";
+}
+@model MsInUsa.Model.FullProfile
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-12 university-header" style="background-image: url(@Href("~/Content/Images/Universities/Background/Main_University.jpg"))">
+
+<div class="col-sm-12" style="align-self: center;">
+<h1>@Model.UserProfile.FirstName.ToUpper()</h1>
+<h3>@Model.DreamUniversity MASTER'S Aspirant</h3>
+<h4>Interested in @Model.MSCourse @if (Model.Term != null && Model.Year != null) {<strong>(@Model.Term, @Model.Year)</strong>}</h4>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+ 
+ 
+<div class="row">
+<div class="col-sm-6">
+<hr>
+<div class="row">
+<div class="col-sm-12">
+<strong>Undergrad:</strong><br>
+<h4>@Model.UGCourse</h4></div>
+</div><br>
+<div class="row text-center">
+<div class="col-sm-4 col-xs-4">
+<i class="glyphicon glyphicon-globe gi-3x text-color"></i>
+<h3><small>GRE</small><br>
+@if(Model.AppearedGre == true) {
+@(Model.GQuant+Model.GVerbal)<br><span style="font-size: 0.5em;">Quant: @Model.GQuant<br>Verbal: @Model.GVerbal</span> }
+else {<h4>Appearing on <small>@Model.GDay/@Model.GMonth/@Model.GYear</small></h4>}
+</h3>
+</div>
+<div class="col-sm-4 col-xs-4">
+<i class="glyphicon glyphicon-book gi-3x text-color"></i>
+@if(Model.Toefl == true) {
+<h3><small>TOEFL</small><br>@(Model.TIListening+Model.TIReading+Model.TISpeaking+Model.TIWriting)</h3> }
+else if (Model.Ielts == true){<h3><small>IELTS</small><br>@((Model.TIListening+Model.TIReading+Model.TISpeaking+Model.TIWriting)/4)</h3> }
+else{ <h3><small>TOEFL/IELTS</small><br><h4>NA</h4></h3>}
+</div>
+<div class="col-sm-4 col-xs-4">
+<i class="glyphicon glyphicon-education gi-3x text-color"></i>
+<h3><small>UG Score</small><br>@Model.UGScore.ToString() cgpa</h3>
+</div>
+</div>
+<div class="clearfix"></div>
+<div class="row text-center">
+<div class="col-sm-4 col-xs-4">
+<br>
+<i class="glyphicon glyphicon-briefcase gi-3x text-color"></i>
+@if(Model.WorkExperience != null &&  Model.WorkExperience != 0){
+<h4><small>Work Exp.</small><br><br>@Model.WorkExperience months</h4>
+}
+else{<h4><small>Work Exp.</small><br><br>NA</h4>}
+</div>
+<div class="col-sm-4 col-xs-4">
+<br>
+<i class="glyphicon glyphicon-file gi-3x text-color"></i>
+<h4><small>Tech Papers</small><br><br>@Model.Papers</h4>
+</div>
+<div class="col-sm-4 col-xs-4">
+<br>
+<i class="glyphicon glyphicon-heart gi-3x text-color"></i>
+<h4><small>Dream Univ.</small><br><br>@Model.DreamUniversity</h4>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+
+<div class="col-sm-6">
+<h3>UNIVERSITIES APPLIED</h3>
+<div class="responsive" id="application-statuses-div">
+<table class="table">
+@if (Model.admitrejects != null)
+{
+    foreach (var c in Model.admitrejects)
+    {
+<tr>
+<td>
+<h4>
+@Html.ActionLink(c.UnivName, "reviews", "Universities", new { id = c.UnivId }, null)<br>
+<small>@c.CourseName</small></h4>
+</td>
+<td class="text-center">
+<h4>
+@if (c.Status == "Admit")
+{
+<span class="label label-success">@c.Status</span>}
+else if (c.Status == "Reject")
+{<span class="label label-danger">@c.Status</span>}
+else if(c.Status == "Applied")
+{<span class="label label-info">@c.Status</span>}
+else if(c.Status == "Interested")
+{<span class="label label-warning">@c.Status</span>}
+</h4></td></tr>
+}}
+else{<tr><td class="text-center"><h4> Student has not applied for any University</h4></td></tr>}
+</table>
+</div>
+</div></div>
+<div class="clearfix"></div> </div>
+<div class="clearfix"></div>
+</div>
+</div>
+<br>

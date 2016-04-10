@@ -1,0 +1,71 @@
+﻿@using MsInUsa.Model;
+@using PagedList;
+@using PagedList.Mvc;
+@model  IPagedList<MsInUsa.Model.Universities_list>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-12 university-header University-Background" style="height: 240px">
+<div class="col-sm-offset-2 col-sm-8" style="align-self: center;">
+<div class="ui-widget">
+<div class="input-group">
+<span class="input-group-addon input-lg" style="background: #fff;"><i id="search-icon" class="glyphicon glyphicon-search"></i></span>
+<input type="text" id="searchUniversity" class="form-control input-lg" placeholder="Search universities" aria-describedby="search-input">
+</div> 
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+ 
+<div class="col-sm-12">
+<h2>Universities in United States</h2>
+</div>
+<div class="clearfix"></div>
+<hr>
+ 
+<div class="col-sm-9" id="university_list">
+<p><em>Showing @Model.Count() universities out of @ViewBag.count</em></p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>@Html.ActionLink("University","Index","Universities", new {sortby = ViewBag.sortUniv},null) <span class="glyphicon glyphicon-triangle-bottom"></span></th>
+<th>@Html.ActionLink("Type","Index","Universities",new {sortby = ViewBag.sortType}, null) <span class="glyphicon glyphicon-triangle-bottom"></span></th>
+<th>@Html.ActionLink("Rank","Index","Universities", new {sortby = ViewBag.sortRank}, null) <span class="glyphicon glyphicon-triangle-bottom"></span></th>
+</tr>
+</thead> </table>
+@foreach(Universities_list c in Model){
+<div class="col-sm-2 hidden-xs">
+<div class="img-thumbnail">
+<img src="Content/Images/universities/Logo/@c.NickName.ToLower()_logo.jpg" alt="@c.NickName-university-logo" class="img-responsive"/> </div>
+</div>
+<div class="col-sm-10">
+<div class="col-sm-9">
+<h4>
+@Html.ActionLink(c.UnivName,"reviews/"+c.UnivId, "Universities", new { @class = "text-color" })<br>
+<small>@c.State, United States</small>
+</h4>
+</div>
+<div class="col-sm-3">
+@if(c.Rank != null){<h4><span class="label label-warning button-color">Top @c.Rank</span></h4> }
+</div>
+<div class="clearfix"></div>
+<div class="col-sm-12">
+<p>
+<small>
+@c.UnivType<br>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", c.AvgTutionRate) annual tuition fee<br> @c.AcceptanceRate% acceptance rate<br> </small>
+</p>
+</div>
+</div>
+<div class="clearfix"></div>
+<hr>
+}
+ @Html.PagedListPager(Model, page => Url.Action("Index", "Universities", new { page,sortby = Request.QueryString["sortby"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded})
+</div>
+</div>
+</div>
+</div>

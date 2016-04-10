@@ -1,0 +1,68 @@
+﻿@model MsInUsa.Model.UserProfile
+
+@{
+    ViewBag.Title = "settings";
+}
+
+<div class="container-fluid">
+</div>
+<br>
+<div class="container text-color">
+<h1><span class="label button-color">Account settings</span></h1><hr>
+@using(Html.BeginForm("settings","Account",Model,FormMethod.Post, new{@class ="form-horizontal"})) {
+@Html.AntiForgeryToken()  
+<div class="form-group ">
+<label class="col-sm-2 control-label">Name:</label>
+<div class="col-sm-4">
+<div class="input text required">
+    @*<input type="text" name="name" class="form-control" placeholder="Enter your name" required="required" maxlength="255" id="name" value="Charith"/>*@
+    @Html.TextBoxFor(m=>m.FirstName, new{ @class="form-control",@placeholder="Enter your name"})
+</div> </div> </div>
+<div class="form-group ">
+<label class="col-sm-2 control-label">Email:</label>
+<div class="col-sm-4">
+<p class="form-control-static">@Html.DisplayFor(m=>m.Email_Id)</p>
+</div>
+</div>
+<div class="form-group ">
+<label class="col-sm-2 control-label">Password:</label>
+<div class="col-sm-4">
+<p class="form-control-static">@Html.ActionLink("Change Password","changepassword","Account")</p>
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label">Phone:</label>
+<div class="col-sm-4">
+<div class="input tel required">
+    @Html.TextBoxFor(m=>m.Phone_Number, new{ @class= "form-control", @placeholder="Enter the Phone Number"})
+</div> 
+</div></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">Birthdate:</label>
+<div class="col-sm-4">
+   @Html.DropDownListFor(m=>m.DOBYear, Model.doBirthYear)
+   @Html.DropDownListFor(m=>m.DOBMonth, Model.FullProfile.listMonth)
+    @Html.DropDownListFor(m=>m.DOBday, Model.FullProfile.listday)
+</div></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">Gender:</label>
+<div class="col-sm-4">
+<div class="radio">
+<label for="gender-m">@*<input type="radio" name="gender" value="M" id="gender-m">*@ @Html.RadioButtonFor(m=>m.Gender, value:"Male") Male</label> </div>
+<div class="radio">
+<label for="gender-f">@*<input type="radio" name="gender" value="F" id="gender-f">*@ @Html.RadioButtonFor(m=>m.Gender, value: "Female") Female</label> </div>
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label">City:</label>
+<div class="col-sm-4">
+<div class="input-group">
+<span class="input-group-addon"><i id="account-settings-city-name-search-icon" class="glyphicon glyphicon-map-marker"></i></span>
+<div class="input text">@*<input type="text" name="account_settings_city_name" class="form-control" autocomplete="off" id="account-settings-city-name" value=""/>*@
+    @Html.TextBoxFor(m=>m.City, new{ @class ="form-control"})
+</div> </div> </div></div>
+<div class="text-right col-sm-6" style="padding-bottom: 2em">
+<button class="btn btn-success btn-lg" type="submit">Save settings</button>
+</div>  
+}</div>
+

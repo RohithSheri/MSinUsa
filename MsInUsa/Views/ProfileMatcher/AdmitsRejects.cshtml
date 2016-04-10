@@ -1,0 +1,93 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using MsInUsa.Model;
+@model IPagedList<MsInUsa.Model.FullProfile>
+@{
+    ViewBag.Title = "AdmitsRejects";
+}
+
+<div class="container section">
+<div class="row">
+<div class="col-sm-9">
+<h1>Admits and Rejects</h1><hr>
+<p>Connect with students having same university applications</p>
+<div class="well text-color">
+@*@using (Html.BeginForm("AdmitsRejects", "ProfileMatcher", new {}, FormMethod.Post, null))
+{
+*@<h4>Find admits & rejects</h4><hr>
+<div class="ui-widget col-sm-4">
+<div class="input-group">
+<span class="input-group-addon button-color"><i id="users-view-search-universities-icon" class="glyphicon glyphicon-education"></i></span>
+<input type="text" id="users-view-search-universities" class="form-control" placeholder="University name" aria-describedby="users-view-search-universities" autocomplete="off">
+</div> 
+</div>
+<div class="ui-widget col-sm-4">
+<div class="input-group">
+<span class="input-group-addon button-color"><i id="users-view-search-courses-icon" class="glyphicon glyphicon-book"></i></span>
+<input type="text" disabled="disabled" id="users-view-search-courses" class="form-control" placeholder="Grad course name" aria-describedby="users-view-search-courses" autocomplete="off">
+</div> 
+</div>
+<div class="input-group col-sm-4">
+<div class="input-group-addon button-color">Status</div>
+<select id="university-application-status" class="form-control">
+<option value="1">Applied</option>
+<option value="2">Admit</option>
+<option value="3">Reject</option>
+<option value="4">Interested</option>
+</select>
+</div>
+<br>
+<div class="text-center">
+<button type="button" id="find-admits-rejects-button" class="btn btn-success btn-sm"> FIND </button>
+</div>
+</div>
+@if (Model.Count == 0) {<h3><span class="label label-warning">We are sorry we didnot find any profile</span></h3> }
+else{
+foreach(var c in Model){
+<div class="col-sm-6">
+<div class="panel panel-warning">
+<div class="panel-body">
+<div class="row">
+<div class="col-sm-9">
+<h4>
+@Html.ActionLink(c.UserProfile.FirstName,"GetProfile","Profiles",new{id= c.Id}, null)
+<br>
+<small>
+@c.admitrejects.First().UnivName @c.admitrejects.First().CourseName<br>
+Fall 2016 </small>
+</h4>
+</div>
+<div class="col-sm-3 text-uppercase">
+@if(c.admitrejects.First().Status == "Admit"){<label class="label label-success">Admit</label>}
+else if(c.admitrejects.First().Status == "Reject"){<label class="label label-danger">Reject</label>}
+else if(c.admitrejects.First().Status == "Interested"){<label class="label label-info">Interested</label>}
+else if(c.admitrejects.First().Status == "Applied"){<label class="label label-warning">Applied</label>}
+<br><br>
+</div>
+</div>
+<div class="row text-center">
+<div class="col-sm-3 col-xs-6">
+<strong>GRE</strong><br>
+@(c.GQuant+c.GVerbal) </div>
+<div class="col-sm-3 col-xs-6">
+@if(c.Toefl==true){
+<strong>TOEFL</strong><br>@(c.TIWriting+c.TISpeaking+c.TIReading+c.TIListening)}
+else if(c.Ielts == true){
+<strong>IELTS</strong><br>@(c.TIWriting+c.TISpeaking+c.TIReading+c.TIListening)}</div>
+<div class="col-sm-3 col-xs-6">
+<strong>UNDERGRAD</strong><br>
+@c.UGScore CGPA</div>
+<div class="col-sm-3 col-xs-6">
+<strong>WORK EX</strong><br>
+@c.WorkExperience Months</div>
+</div>
+</div>
+</div>
+</div>
+ }
+@Html.PagedListPager(Model, page => Url.Action("SimilarProfiles", "ProfileMatcher", new { page }), new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded})
+}
+<div class="clearfix"></div>
+</div>
+</div>
+</div>

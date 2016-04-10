@@ -1,0 +1,349 @@
+﻿@using  MsInUsa.Model;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <title>@ViewBag.Title :: MsInUsa</title>
+    <link href="~/Content/themes/base/autocomplete.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/base.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+     
+</head>
+<body  style="font-family:Roboto, Helvetica, Arial, sans-s ;color:rgb(85,85,85)">
+    @******Header Content******@
+    <nav class="navbar navbar-default navbar-static-top" style="background-color:#fff; margin-bottom:0px">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/Home/Index" style="font-family: Raleway, sans-serif; background-color: #563D7C; font-weight: 700; font-size: 30px; color: #fff; border-bottom-right-radius: 12px; border-top-right-radius: 12px; border-color: black">Ms-UsA</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">UNIVERSITIES
+        <span class="caret"></span></a> 
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("University List", "Index", "Universities")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Compare Universities", "CompareUniversities", "Universities")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("University DeadLines", "UniversitiesDeadlines", "Universities")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">PROFILE MATCHER
+        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Similar Profiles", "SimilarProfiles", "ProfileMatcher")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Admits & Rejects", "AdmitsRejects", "ProfileMatcher")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Profile Evaluator", "Index", "ProfileEvaluator")</li>
+                            @*<li role="separator" class="divider"></li>*@
+                            @*<li>@Html.ActionLink("Roommate finder", "Index", "RoomateFinder")</li>*@
+                        </ul>
+                    </li>
+                    @if (Session["UserName"] != null){
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> @Session["UserName"].ToString().ToUpper()
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("My Profile", "Myprofile", "Profiles")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Account Settings", "settings", "Account")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Log Out", "LogOut", "Account")</li>
+                       </ul>
+                    </li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["UserName"] != null)
+                    {
+                        <li>@Html.ActionLink("WELCOME " + Session["UserName"].ToString().ToUpper(),"Index","Home")</li>
+                        <li>@Html.ActionLink("LOG OUT", "LogOut", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Sign Up", "Register", "Account")</li>
+                        <li>@Html.ActionLink("Log In", "LogIn", "Account")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @******Body************@
+    @RenderBody()
+    @********End Of Body**********@
+    @*****Start of Footer******@
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                    <p><strong>UNIVERSITY INFORMATION</strong></p>
+                    <ul class="list-unstyled">
+                        <li>@Html.ActionLink("University List", "UniversitiesReview", "Universities")</li>
+                        <li>@Html.ActionLink("Compare Universities", "CompareUniversities", "Universities")</li>
+                        <li>@Html.ActionLink("Application DeadLines", "UniversitiesDeadlines", "Universities")</li>
+                    </ul>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <p><strong>PROFILE MATCHER</strong></p>
+                    <ul class="list-unstyled">
+                        <li>@Html.ActionLink("Similar profiles", "SimilarProfiles", "ProfileMatcher")</li>
+                        <li>@Html.ActionLink("Admit & rejects", "AdmitRejects", "ProfileMatcher")</li>
+                        <li>@Html.ActionLink("Profile Evaluator", "Index", "ProfileEvaluator")</li>
+                        @*<li>@Html.ActionLink("Roommate Finder", "Index", "RoomateFinder")</li>*@
+                    </ul>
+                </div>
+                <div class="visible-xs">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <p><strong>CONNECT</strong></p>
+                    <ul class="list-unstyled">
+                        <li><a href="/contact-us">Contact us</a></li>
+                        <li><a href="https://www.facebook.com/MsInUsa" target="_blank">Facebook</a></li>
+                        <li><a href="https://twitter.com/MsInUsa" target="_blank">Twitter</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <p><strong>OTHER</strong></p>
+                    <ul class="list-unstyled">
+                        <li>Sitemap</li>
+                        <li>Privacy</li>
+                        <li>Terms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    @*****End Of Footer******@
+    @*  @Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/bootstrapScript")*@
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/MsInusa.js"></script>
+    <script>
+        var js = jQuery.noConflict();
+        js(function () {
+            js("#searchUniversity").autocomplete({
+              source:  function (request, response) {
+                     js.ajax({
+                        url: '@Url.Action("searchUniversities", "Universities")',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: request,
+                        success: function (data) {
+                            if (data.length == null) js("#search-icon").replaceWith('<i id="search-icon" class="glyphicon glyphicon-warning-sign"></i>');
+                        response(js.map(data, function (value, key) {
+                        return {
+                        label: value,
+                        value: key
+                    };
+                    }));
+                }
+                });
+              },
+                search: function (event, ui) {
+                    js("#search-icon").replaceWith('<i id="search-icon" class="glyphicon glyphicon-repeat fast-right-spinner"></i>');
+                },
+                open: function (event, ui) {
+                    js("#search-icon").replaceWith('<i id="search-icon" class="glyphicon glyphicon-search"></i>');
+                },
+                minLength: 2,
+                select: function (event, ui)
+                {
+                    var id = ui.item.value; ui.item.value = ui.item.label;
+                    window.location.href = 'Universities/reviews/' + id;
+                },
+                focus: function (event, ui) {
+                    event.preventDefault();
+                    js("#searchUniversity").val(ui.item.label);
+                }
+            });
+            var universities = [];
+            js("#compare-universities-search").autocomplete({
+                source: function (request, response) {
+                    js.ajax({
+                        url: '@Url.Action("searchUniversities", "Universities")',
+                         type: 'GET',
+                         dataType: 'json',
+                         data: request,
+                         success: function (data) {
+                             if (data.length == null) js("#search-icon").replaceWith('<i id="search-icon" class="glyphicon glyphicon-warning-sign"></i>');
+                             response(js.map(data, function (value, key) {
+                                 if (universities.indexOf(key) == -1) {
+                                     return {
+                                         label: value,
+                                         value: key
+                                     };
+                                 }
+                             }));
+                         }
+                     });
+                 },
+                minLength: 2,
+                search: function (event, ui) {
+                    js("#search-icon").replaceWith('<i id="search-icon" class="glyphicon glyphicon-repeat fast-right-spinner"></i>');
+                },
+                open: function (event, ui) {
+                    js("#search-icon").replaceWith('<i id="search-icon" class="glyphicon glyphicon-search"></i>');
+                },
+                select: function (event, ui)
+                {
+                    event.preventDefault();
+                    universities.push(ui.item.value);
+                    if (universities.length == 1) js("#university_list_head h3").replaceWith('<h3><i class="glyphicon glyphicon-plus"></i>Add one more university to compare</h3>');
+                    if (universities.length == 2) {
+                        js("#university_list_head h3").replaceWith('<h3><i class="glyphicon glyphicon-plus"></i>You can add more Universities to compare<h3>');
+                        js("#compare_button").append('<hr><input class="btn btn-primary col-sm-6 text-center button-color" id="compare-button" type="submit" value="COMPARE">');
+                        js("#compare_button").css({ 'padding-bottom': '2em' })
+                        js("#compare-button").click(universities, function (e) {
+                            e.preventDefault();
+                            var univlength = universities.length;
+                            var param = "";
+                            for (var i = 0; i < univlength-1; i++)
+                                param += universities[i] + ",";
+                            param += universities[univlength - 1];
+                            location.href = '/MsInUsa/universities/compare/?universities='+param;
+                        });
+                    }
+                    js("#university_list").append('<h4><hr>' + ui.item.label + '</h4>');
+                    document.getElementById("compare-universities-search").value = "";
+                },
+               focus: function (event, ui) {
+                    event.preventDefault();
+                }
+            });
+            var univ =""; var course =""; var univname= ""; var coursename=""; var status ="";
+            js("#users-view-search-universities").autocomplete({
+                source: function (request, response) {
+                    //console.log("hello");
+                    js.ajax({
+                        url: '@Url.Action("searchUniversities", "Universities")',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: request,
+                        success: function (data) {
+                            if (data.length == null) js("#users-view-search-universities-icon").replaceWith('<i id="users-view-search-universities-icon" class="glyphicon glyphicon-warning-sign"></i>');
+                            response(js.map(data, function (value, key) {
+                               // if (universities.indexOf(key) == -1) {
+                                    return {
+                                        label: value,
+                                        value: key
+                                    };
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                search: function (event, ui) {
+                    js("#users-view-search-universities-icon").replaceWith('<i id="users-view-search-universities-icon" class="glyphicon glyphicon-repeat fast-right-spinner"></i>');
+                },
+                open: function (event, ui) {
+                    js("#users-view-search-universities-icon").replaceWith('<i id="users-view-search-universities-icon" class="glyphicon glyphicon-search"></i>');
+                },
+                select: function (event, ui)
+                {
+                    event.preventDefault();
+                    //universities.push(ui.item.value);
+                    univ = ui.item.value;
+                    univname = ui.item.label;
+                    js("#users-view-search-courses").prop("disabled", false);
+                },
+                focus: function (event, ui) {
+                    event.preventDefault();
+                    js("#users-view-search-universities").val(ui.item.label);
+                }
+            });
+            js("#users-view-search-courses").autocomplete({
+                source: function (request, response) {
+                    js.ajax({
+                        url: '@Url.Action("searchCourses", "Universities")' + '?univid=' + univ,
+                        type: 'GET',
+                        dataType: 'json',
+                        data: request,
+                        success: function (data) {
+                            if (data.length == null) js("#users-view-search-courses-icon").replaceWith('<i id="users-view-search-courses-icon" class="glyphicon glyphicon-warning-sign"></i>');
+                            response(js.map(data, function (value, key) {
+                                return {
+                                    label: value,
+                                    value: key
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                search: function (event, ui) {
+                    js("#users-view-search-courses-icon").replaceWith('<i id="users-view-search-courses-icon" class="glyphicon glyphicon-repeat fast-right-spinner"></i>');
+                },
+                open: function (event, ui) {
+                    js("#users-view-search-courses-icon").replaceWith('<i id="users-view-search-courses-icon" class="glyphicon glyphicon-search"></i>');
+                },
+                select: function (event, ui) {
+                    event.preventDefault();
+                    coursename = ui.item.label;
+                    course = ui.item.value;
+                    //document.getElementById("users-view-search-courses").value = "";
+                },
+                focus: function (event, ui) {
+                    event.preventDefault();
+                    js("#users-view-search-courses").val(ui.item.label);
+                }
+            });
+            js("#add-application-status-button").click(function () {
+                if (js("#users-view-search-courses").val().length > 0 && js("#users-view-search-universities").val().length > 0) {
+                    status = js('#university-application-status :selected').text();
+                    document.getElementById("users-view-search-courses").value = "";
+                    document.getElementById("users-view-search-universities").value = "";
+                    location.href = '/MsInUsa/profiles/addUniversities/?university=' + univ + "&course=" + coursename + "&status=" + js('#university-application-status :selected').text();
+                    js("#add-application-status-message-div").replaceWith('<span class="text-success"><i class="glyphicon glyphicon-ok-circle"></i>Application Status was added successfully!</span>')
+                    js("#users-view-search-courses-icon").replaceWith('<i id="users-view-search-courses-icon" class="glyphicon glyphicon-book"></i>');
+                    js("#users-view-search-universities-icon").replaceWith('<i id="users-view-search-courses-icon" class="glyphicon glyphicon-education"></i>');
+                }
+                else if (!js("#users-view-search-courses").val().length > 0) js("#users-view-search-courses").focus();
+            });
+            js('#delete-application-status-modal').on('show.bs.modal', function (event) {
+                statusUpdate("delete",event)
+            });
+            js('#edit-application-status-modal').on('show.bs.modal', function (event) {
+                statusUpdate("edit",event)
+            });
+            function statusUpdate(sc,ev) {
+                var button = js(ev.relatedTarget)
+                univ = button.data('universityid')
+                univname = button.data('university')
+                coursename = button.data('course')
+                var content = "<h4>" + univname + "<br><small>" + coursename + "</small></h4>"
+                js('#modal-university-course-'+sc).replaceWith(content);
+            }
+            js('#edit-application-status-modal-save-button').click(function () {
+                var button = js(event.relatedTarget)
+                js(this).html('<i class="glyphicon glyphicon-refresh"><i> Saving.....')
+                location.href = '/MsInUsa/profiles/editUniversities/?university=' + univ + "&course=" + coursename + "&status=" + js('#modal-status :selected').text();
+            });
+            js('#delete-application-status-modal-save-button').click(function () {
+                var button = js(event.relatedTarget)
+                js(this).html('<i class="glyphicon glyphicon-refresh"><i> Deleting.......')
+                location.href = '/MsInUsa/profiles/deleteUniversities/?university=' + univ + "&course=" +coursename;
+            });
+            js('#find-admits-rejects-button').click(function () {
+                location.href = '/MsInUsa/ProfileMatcher/getstatus/?university=' + univ + "&course=" + coursename + "&status=" + js('#university-application-status :selected').text();
+              });
+          });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

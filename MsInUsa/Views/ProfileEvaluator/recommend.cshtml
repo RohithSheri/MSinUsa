@@ -1,0 +1,275 @@
+﻿@model  MsInUsa.Model.FullProfile
+
+@{
+    ViewBag.Title = "Recommended";
+}
+
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+<div class="row">
+<div class="col-sm-12">
+<h1>Suggested Universities</h1><hr>
+<p>Get started with your research using this list of suggested universities based on your profile. Note that the list of Universities displayed by the GRAD SCHOOL FINDER is by no means exhaustive, and is meant solely to give you an idea of the type (and standing) of university you should look to apply for. Ratings are on the scale of 10 where 10 is terrific and 1 is bad.</p>
+</div>
+</div>
+<br>
+ 
+<div class="row">
+<div class="col-sm-12 responsive">
+<table class="table">
+<tbody><tr>
+<th></th>
+<th><h4>AMBITIOUS UNIVERSITIES</h4></th>
+<th class="text-center"><h4>TYPE</h4></th>
+<th class="text-center"><h4>FEE<small>/year</small></h4></th>
+</tr>
+@foreach(var c in Model.ambUniv){
+<tr>
+<td style="width: 16px; background-color: #FF0000;">
+</td><td style="width:48%;">
+<div class="col-sm-2 hidden-xs">
+<img src="~/Content/Images/Universities/Logo/@c.NickName.ToLower()_logo.jpg" alt="@c.NickName" class="img-responsive"> </div>
+<div class="col-sm-6">
+@Html.ActionLink(c.UnivName,"reviews","Universities", c.UnivId, null)
+<span class="hidden-xs"><br>
+<small>Minnesota, United States</small></span></div>
+<div class="col-sm-4">
+<small>@Model.MSCourse</small>
+</div>
+</td>
+<td class="text-center">
+@c.UnivType </td>
+<td class="text-center">
+@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", c.AvgTutionRate)</td>
+</tr>
+}
+</tbody></table>
+</div>
+</div>
+<br>
+ 
+<div class="row">
+<div class="col-sm-12 responsive">
+<table class="table">
+<tbody><tr>
+<th></th>
+<th><h4>MODERATE UNIVERSITIES</h4></th>
+<th class="text-center"><h4>TYPE</h4></th>
+<th class="text-center"><h4>FEE<small>/year</small></h4></th>
+</tr>
+@foreach(var c in Model.modUniv){
+<tr>
+<td style="width: 16px; background-color:#ffd800;">
+</td><td style="width:48%;">
+<div class="col-sm-2 hidden-xs">
+<img src="~/Content/Images/Universities/Logo/@c.NickName.ToLower()_logo.jpg" alt="@c.NickName" class="img-responsive"> </div>
+<div class="col-sm-6">
+@Html.ActionLink(c.UnivName,"reviews","Universities", c.UnivId, null)
+<span class="hidden-xs"><br>
+<small>Minnesota, United States</small></span></div>
+<div class="col-sm-4">
+<small>@Model.MSCourse</small>
+</div>
+</td>
+<td class="text-center">
+@c.UnivType </td>
+<td class="text-center">
+@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", c.AvgTutionRate)</td>
+</tr>
+}
+</tbody></table>
+</div>
+</div>
+<br>
+ 
+<div class="row">
+<div class="col-sm-12 responsive">
+<table class="table">
+<tbody><tr>
+<th></th>
+<th><h4>SAFE UNIVERSITIES</h4></th>
+<th class="text-center"><h4>TYPE</h4></th>
+<th class="text-center"><h4>FEE<small>/year</small></h4></th>
+</tr>
+@foreach(var c in Model.safeUniv){
+<tr>
+<td style="width: 16px; background-color: #4cff00;">
+</td><td style="width:48%;">
+<div class="col-sm-2 hidden-xs">
+<img src="~/Content/Images/Universities/Logo/@c.NickName.ToLower()_logo.jpg" alt="@c.NickName" class="img-responsive"> </div>
+<div class="col-sm-6">
+@Html.ActionLink(c.UnivName,"reviews","Universities", c.UnivId, null)
+<span class="hidden-xs"><br>
+<small>Minnesota, United States</small></span></div>
+<div class="col-sm-4">
+<small>@Model.MSCourse</small>
+</div>
+</td>
+<td class="text-center">
+@c.UnivType </td>
+<td class="text-center">
+@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:c0}", c.AvgTutionRate)</td>
+</tr>
+}
+</tbody></table>
+</div>
+</div>
+
+<div class="clearfix"></div><hr>
+<div class="row">
+<div class="col-sm-9">
+<div class="row">
+<div class="col-sm-9">
+<h1><i class="glyphicon glyphicon-education"></i> Profile Evaluator</h1>
+<p>Get an elaborate list of Ambitious, Realistic and Safe Universities for Masters in the US based on your Profiles, Field of Interest & GRE Score using our unique GRAD SCHOOL FINDER.</p>
+</div>
+</div>
+<div class="clearfix"></div><hr>
+<div class="row">
+<div class="col-sm-9">
+ @using(Html.BeginForm("Index","ProfileEvaluator",FormMethod.Post,new{@class="form-horizontal"})){
+@*<form method="post" accept-charset="utf-8" class="form-horizontal" action="/university-courses/recommend">
+<div style="display:none;"><input type="hidden" name="_method" value="POST"/></div>*@
+ <div class="form-group">
+<div class="col-sm-4">
+<label>Course: </label>
+</div>
+<div class="col-sm-8">
+@Html.DropDownListFor(m => m.MSCourse, Model.itemslist, new {@class ="form-control" })
+</div>
+</div>
+<hr>
+<div class="form-group">
+<div class="col-sm-4">
+<label>GRE</label>
+</div>
+<div class="col-sm-4">
+<div class="input number required"><label for="gre-verbal-score">Verbal Score:</label>
+    @Html.TextBoxFor(m => m.GVerbal, new { @class="form-control", @placeholder="Verbal-Score", @required ="required"})
+    @Html.ValidationMessageFor(m=>m.GVerbal)
+</div> </div>
+<div class="col-sm-4">
+<div class="input number required"><label for="gre-quant-score">Quant Score:</label>
+    @Html.TextBoxFor(m => m.GQuant, new { @class="form-control", @placeholder="Quant-Score", @required ="required"})
+    @Html.ValidationMessageFor(m=>m.GQuant)
+</div> </div>
+</div>
+<hr>
+<div class="form-group">
+<div class="col-sm-4">
+<label>English test</label>
+</div>
+<div class="col-xs-4">
+<div class="radio">
+@*<input id="en-exam-key-2" type="radio" name="en_exam_key" checked required="required" value="2"/> TOEFL*@
+    @if(Model.Toefl != null && Model.Toefl == true){
+    @Html.RadioButtonFor(m=>m.Toefl, value : true,htmlAttributes: new{ @checked= true,id="en-exam-key-1"}) }
+    else{ @Html.RadioButtonFor(m=>m.Toefl,value: true,htmlAttributes: new{id="en-exam-key-1"})}
+     TOEFL
+</div>
+<div class="radio">
+@*<input id="en-exam-key-1" type="radio" name="en_exam_key" required="required" value="1"/> IELTS*@
+    @if(Model.Ielts != null && Model.Ielts == true){
+     @Html.RadioButtonFor(m=>m.Toefl,value:false,htmlAttributes: new{@checked= true,id="en-exam-key-2"})}
+    else{@Html.RadioButtonFor(m=>m.Toefl,value:false,htmlAttributes: new{id="en-exam-key-2"})}IELTS 
+</div>
+</div>
+<div class="col-sm-4">
+<div class="input number required"><label for="en-exam-score">English test score (out of 9 for IELTS)</label>
+    @*<input type="number" name="en_exam_score" class="form-control" step="0.1" min="1" max="120" required="required" id="en-exam-score" value="86"/>*@
+   @if(Model.Toefl != null && Model.Toefl == false){@Html.TextBoxFor(m=>m.score,new{@min="1" , @max="9", type="number", @class="form-control", id="en-exam-score", @required ="required"})}
+   else if (Model.Toefl != null && Model.Toefl == true) {@Html.TextBoxFor(m=>m.score,new{@min="1" , @max="120", type="number", @class="form-control", id="en-exam-score", @required ="required"})}
+</div>
+</div>
+</div>
+<hr>
+<div class="form-group">
+<div class="col-sm-4">
+<label>Undergrad academics<br><small>(out of 10 CGPA)</small></label>
+</div>
+@*<div class="col-sm-4">
+<div class="radio">
+<input id="ug-exam-key-1" type="radio" name="ug_exam_key" required="required" value="1"/> CGPA/Credit based
+</div>
+<div class="radio">
+<input id="ug-exam-key-2" type="radio" name="ug_exam_key" checked required="required" value="2"/> Percentage
+</div>
+</div>*@
+<div class="col-sm-4">
+<div class="input number required"><label for="ug-exam-score">Undergrad score</label>
+    @*<input type="number" name="ug_exam_score" class="form-control" step="0.01" min="1" max="100" required="required" id="ug-exam-score" value="77.5"/>*@
+    @Html.TextBoxFor(m=>m.UGScore, new{@class="form-control",type="number", @required ="required"})
+    @Html.ValidationMessageFor(m=>m.UGScore)
+</div> </div>
+</div>
+<hr>
+<div class="form-group">
+<div class="col-sm-4">
+<label>Relevant Work Experience<br><small>(in months)</small></label>
+</div>
+<div class="col-sm-4">
+<div class="input number required">
+    @*<input type="number" name="work_experience_months" class="form-control" required="required" id="work-experience-months" value="20"/>*@
+    @Html.TextBoxFor(m=>m.WorkExperience, new{@class="form-control", type="number", @min=0, @required="required"})
+    @Html.ValidationMessageFor(m=>m.WorkExperience)
+</div> </div>
+</div>
+<hr>
+<div class="form-group">
+<div class="col-sm-4">
+<label>Technical Papers Published<br><small>(Select highest level of publication)</small></label>
+</div>
+<div class="col-sm-8">
+ @Html.DropDownListFor(m=>m.Papers, Model.listpapers,new{@class="form-control"})
+</div>
+</div>
+<hr>
+<div class="form-group">
+<div class="col-sm-4">
+<label>SOP Rating</label>
+</div>
+<div class="col-sm-8">
+<div class="input text">
+    @*<input type="text" name="sop_rating" class="form-control" id="sop-rating" value="5"/>*@
+    @Html.TextBoxFor(m=>m.Sop, new{@type="number", @min =0,@max =10, @class="form-control", @required="required"})
+</div> </div>
+</div>
+<div class="form-group">
+<div class="col-sm-4">
+<label>LOR Rating</label>
+</div>
+<div class="col-sm-8">
+<div class="input text">
+    @*<input type="text" name="lor_rating" class="form-control" id="lor-rating" value="5"/>*@
+    @Html.TextBoxFor(m=>m.Lor, new{@type="number", @min =0,@max =10, @class="form-control", @required="required"})
+</div> </div>
+</div>
+<div class="form-group">
+<div class="col-sm-4">
+<label>Extracurricular Rating</label>
+</div>
+<div class="col-sm-8">
+<div class="input text">
+    @*<input type="text" name="extra_curricular_rating" class="form-control" id="extra-curricular-rating" value="5"/>*@
+    @Html.TextBoxFor(m=>m.ExtraCurricular, new{@type="number", @min =0,@max =10, @class="form-control", @required="required"})
+</div> </div>
+</div>
+<div class="form-group">
+<div class="col-sm-4">
+<label>Community Service Rating</label>
+</div>
+<div class="col-sm-8">
+<div class="input text">
+    @*<input type="text" name="community_service_rating" class="form-control" id="community-service-rating" value="5"/>*@
+    @Html.TextBoxFor(m=>m.CommunityService, new{@type="number", @min =0,@max =10, @class="form-control", @required="required"})
+</div> </div>
+</div>
+<button class="btn btn-primary btn-lg btn-block" type="submit">SHOOT IT</button>}</div>
+</div> </div>
+<div class="col-sm-3">
+<div style="padding-top: 16px">
+</div> </div>
+<div class="clearfix"></div>
+</div>
+</div></div></div> <br>
