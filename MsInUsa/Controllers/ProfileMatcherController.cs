@@ -17,7 +17,9 @@ namespace MsInUsa.Controllers
         {
             int id = Convert.ToInt32(Session["UserId"]);
             FullProfile fs = connection.FullProfiles.First(m => m.Id == id);
-            List<FullProfile> obj = connection.FullProfiles.Where(m =>(m.personalScore <= fs.personalScore+1 && m.personalScore >= fs.personalScore-1 && m.Id != id)).ToList();
+            decimal? actualscore = fs.personalScore + Convert.ToDecimal(0.3);
+            decimal? negativescore = fs.personalScore - Convert.ToDecimal(0.3);
+            List<FullProfile> obj = connection.FullProfiles.Where(m =>(m.personalScore <= actualscore && m.personalScore >= negativescore  && m.Id != id)).ToList();
             return View(obj.ToPagedList(page??1,8));
         }
         

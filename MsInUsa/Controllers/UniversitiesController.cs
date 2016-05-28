@@ -73,8 +73,10 @@ namespace MsInUsa.Controllers
         {
             if(universities!=""){
                 ViewBag.sortparamUniv = universities;
+                string[] univ = universities.Split(',').ToArray();
             using(MsInUsEntities connection = new MsInUsEntities()){
-                IPagedList<Universities_list> universitylist = connection.Universities_list.Where(m=> universities.Contains(m.UnivId.ToString())).ToList().ToPagedList(page ?? 1, 5);
+                IPagedList<Universities_list> universitylist = connection.Universities_list.Where(m => univ.Any(y => y == m.UnivId.ToString())).ToList().ToPagedList(page ?? 1, 5);
+                   // universities(m.UnivId.ToString())).ToList().ToPagedList(page ?? 1, 5);
                 return View(universitylist);
             }
           }
