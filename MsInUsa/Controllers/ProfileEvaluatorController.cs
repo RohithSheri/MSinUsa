@@ -7,6 +7,8 @@ using MsInUsa.Model;
     
 namespace MsInUsa.Controllers
 {
+    /*gets the profile of the user by checking whether there exists a profile using the validateAdd attribute and whether
+    user is logged in. */
     [UserAuthorize][ValidateAdd]
     public class ProfileEvaluatorController : Controller
     {
@@ -22,7 +24,8 @@ namespace MsInUsa.Controllers
             cobj.initilization(fs);
             return View(fs);
         }
-
+        
+        //Post the profile to get the list of universities based on the generated user score.
         [HttpPost]
         public ActionResult Index(FullProfile fs)
         {
@@ -37,7 +40,8 @@ namespace MsInUsa.Controllers
             cobj.initilization(fs);
             return View("recommend",fs);
         }
-
+        
+        //genertates score for the user
         private decimal? getscore(FullProfile fs)
         {
             decimal paper = 3;
