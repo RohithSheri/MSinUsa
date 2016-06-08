@@ -15,6 +15,7 @@ namespace MsInUsa.Controllers
         string[] term = new string[] { "Fall", "Spring", "Summmer"};
         MsInUsEntities genConnection = new MsInUsEntities();
        
+       //this gets profile of the user
         public ActionResult add()
         {
            int userid = Convert.ToInt32(Session["UserId"]);
@@ -31,7 +32,9 @@ namespace MsInUsa.Controllers
             return RedirectToAction("MyProfile", "Profiles");
 
         }
-
+        
+        
+        //this adds profile of the user
         [HttpPost]
         public ActionResult add(FullProfile fullprofile)
         {
@@ -57,7 +60,8 @@ namespace MsInUsa.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
+        
+        //this updates user profile
         [HttpPost]
         public ActionResult edit(FullProfile fullprofile) {
             using (MsInUsEntities connection = new MsInUsEntities())
@@ -77,7 +81,8 @@ namespace MsInUsa.Controllers
             }
             return RedirectToAction("MyProfile", "Profiles");
         }
-
+        
+        //this gets user profile
         [HttpGet]
         public ActionResult edit(int? id)
         {
@@ -100,7 +105,8 @@ namespace MsInUsa.Controllers
            if(dtbase.AdmitsRejects.Any(m=>m.StudentId == id)) fullprofiles.admitrejects = dtbase.AdmitsRejects.Where(m => m.StudentId == id).ToList();
             return View(fullprofiles);
         }
-
+        
+        //this adds the universities that the users is admitted, interested, rejected, applied
         [ValidateAdd]
         public ActionResult addUniversities(string university,string course, string status)
         {
@@ -125,7 +131,8 @@ namespace MsInUsa.Controllers
             }
             return RedirectToAction("Myprofile");
         }
-
+        
+        //updates the univerisity status
         [ValidateAdd]
         public ActionResult editUniversities(string university, string course, string status)
         {
@@ -141,7 +148,9 @@ namespace MsInUsa.Controllers
             }
             return RedirectToAction("Myprofile");
         }
-
+        
+        
+        //removes universities from the list
         [ValidateAdd]
         public ActionResult deleteUniversities(string university, string course)
         {
@@ -157,7 +166,8 @@ namespace MsInUsa.Controllers
             }
             return RedirectToAction("Myprofile");
         }
-
+        
+        //gets the score for the user
         [NonAction]
         private decimal? getscore(FullProfile fs)
         {
@@ -174,7 +184,7 @@ namespace MsInUsa.Controllers
             decimal? total = ((((((quant+verbal) / 340) * 10) + score + ugscore + ((workexp / 42) * 10) + paper) / 5));
             return total;
         }
-
+        
         public ActionResult GetProfile(int id)
         {
             FullProfile fs = genConnection.FullProfiles.First(m => m.Id == id);
