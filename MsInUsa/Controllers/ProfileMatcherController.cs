@@ -9,6 +9,7 @@ using PagedList.Mvc;
 
 namespace MsInUsa.Controllers
 {
+    //Gets all the users whose profile matches the other users
     [UserAuthorize][ValidateAdd]
     public class ProfileMatcherController : Controller
     {
@@ -23,6 +24,7 @@ namespace MsInUsa.Controllers
             return View(obj.ToPagedList(page??1,8));
         }
         
+        //gets all the profiles whose admits and rejects matches the applied universities of the user
         public ActionResult AdmitsRejects(int ? page)
         {
             int id = Convert.ToInt32(Session["UserId"]);
@@ -46,6 +48,7 @@ namespace MsInUsa.Controllers
            return View(fs.ToPagedList(page??1,8));
         }
 
+        //gets the users profile based on the university, course and status name
         public ActionResult getstatus(int ? page, int university, string course, string status)
         {
             int id = Convert.ToInt32(Session["UserId"]);
