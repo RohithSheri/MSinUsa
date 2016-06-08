@@ -7,11 +7,12 @@ using MsInUsa.Model;
 
 namespace MsInUsa.Controllers
 {
+    //Home controller for the home page of the web
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            return View();//view for the index page of the home controller
         }
         
     }
