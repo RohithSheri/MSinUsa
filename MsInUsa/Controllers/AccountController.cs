@@ -10,8 +10,10 @@ using System.IO;
 
 namespace MsInUsa.Controllers
 {
+    //Inherits from the controller class
     public class AccountController : Controller
     {
+        //Different action action methods 
         public ActionResult LogIn()
         {
             return View();
@@ -20,6 +22,7 @@ namespace MsInUsa.Controllers
         [HttpPost]
         public ActionResult LogIn(UserProfile userprofile)
         {
+            //connects and checks with the user credentials
                 using (MsInUsEntities msInUsConnection = new MsInUsEntities())
                 {
                     if (!msInUsConnection.UserProfiles.Any(m => m.Email_Id == userprofile.Email_Id))
@@ -72,6 +75,7 @@ namespace MsInUsa.Controllers
             return RedirectToAction("NotFound", "Error");
             }
 
+        //Checks whether user is availble when registering
         public JsonResult isUserAvailable(string Email_IdRegister)
         {
             MsInUsEntities connection = new MsInUsEntities();
@@ -82,7 +86,8 @@ namespace MsInUsa.Controllers
         {
             if (Session["UserName"] != null) Session.RemoveAll();
         }
-
+        
+        //Gets the user settings profile  
         [UserAuthorize]
         public ActionResult settings()
         {
@@ -106,7 +111,8 @@ namespace MsInUsa.Controllers
                 userprofile.doBirthYear = year;
                 return View(userprofile);
         }
-
+        
+        //sets the user profile using settings
         [HttpPost]
         public ActionResult settings(UserProfile userprofile)
         {
